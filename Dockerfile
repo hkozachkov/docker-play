@@ -1,10 +1,10 @@
 FROM ubuntu:14.04
-MAINTAINER Carlos Moro <cmoro@deusto.es>
+MAINTAINER Henry Kozachkov <hkozachkov@gmail.com>
 
 # Set locales
-RUN locale-gen en_GB.UTF-8
-ENV LANG en_GB.UTF-8
-ENV LC_CTYPE en_GB.UTF-8
+RUN locale-gen en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LC_CTYPE en_US.UTF-8
 
 # Fix sh
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
@@ -19,17 +19,17 @@ RUN mkdir /home/play/Code
 RUN chown play:play /home/play/Code
 
 # Install dependencies
-ENV ACTIVATOR_VERSION 1.3.6
+ENV ACTIVATOR_VERSION 1.3.7
 RUN apt-get update && \
     apt-get install -y git build-essential curl wget zip unzip software-properties-common
 WORKDIR /tmp
 
 # Install play
 RUN wget http://downloads.typesafe.com/typesafe-activator/$ACTIVATOR_VERSION/typesafe-activator-$ACTIVATOR_VERSION.zip && \
-    unzip typesafe-activator-1.3.6.zip && \
-    mv activator-dist-1.3.6 /opt/activator && \
+    unzip typesafe-activator-1.3.7.zip && \
+    mv activator-dist-1.3.7 /opt/activator && \
     chown -R play:play /opt/activator && \
-    rm typesafe-activator-1.3.6.zip
+    rm typesafe-activator-1.3.7.zip
 
 # Install Java and dependencies
 RUN \
